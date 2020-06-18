@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+BASE_DIR=$(dirname $0)
+
+if [[ "install" == $1 ]]; then
+    echo "Installing dot configuration files"
+    cp -v ${BASE_DIR}/vimrc ${HOME}/.vimrc
+    
+    echo "Installing Vundle"
+    rm -rf ${HOME}/.vim/bundle/Vundle.vim
+    git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
+    
+elif [[ "minimal" == $1 ]]; then
+    echo "Minimal installing dot configuration files"
+    cp -v ${BASE_DIR}/minimal/vimrc ${HOME}/.vimrc
+
+elif [[ "uninstall" == $1 ]]; then
+    echo "Uninstalling dot configuration files"
+    rm ${HOME}/.vimrc
+
+    echo "Uninstalling Vundle"
+    rm -rf ${HOME}/.vim/bundle/Vundle.vim
+
+else
+    echo "Usage: config install/uninstall"
+fi
