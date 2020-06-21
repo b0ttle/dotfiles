@@ -22,6 +22,10 @@ if [[ "install" == $1 ]]; then
         echo "Installing aliases"
         cp -v ${BASE_DIR}/aliases ${HOME}/.oh-my-zsh/custom/aliases.zsh
     fi
+
+    echo "Then you should:"
+    echo "1) open vim and run :PluginInstall"
+    echo "2) source ~/.zshrc"
     
 elif [[ "minimal" == $1 ]]; then
     echo "Minimal installing dot configuration files"
