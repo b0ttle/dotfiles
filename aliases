@@ -1,0 +1,2 @@
+alias pact="conda activate"
+alias pdeact="conda deactivate"

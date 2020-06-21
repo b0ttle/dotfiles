@@ -5,10 +5,21 @@ BASE_DIR=$(dirname $0)
 if [[ "install" == $1 ]]; then
     echo "Installing dot configuration files"
     cp -v ${BASE_DIR}/vimrc ${HOME}/.vimrc
+    cp -v ${BASE_DIR}/zshrc ${HOME}/.zshrc
     
     echo "Installing Vundle"
     rm -rf ${HOME}/.vim/bundle/Vundle.vim
     git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
+
+    if [ ! -a "/bin/zsh"]; then
+        echo "Install zsh first"
+    else
+        echo "Installing Oh-my-zsh"
+        rm -rf ${HOME}/.oh-my-zsh
+        git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh
+        echo "Installing aliases"
+        cp -v ${BASE_DIR}/aliases ${HOME}/.oh-my-zsh/custom/aliases.zsh
+    fi
     
 elif [[ "minimal" == $1 ]]; then
     echo "Minimal installing dot configuration files"
@@ -20,6 +31,11 @@ elif [[ "uninstall" == $1 ]]; then
 
     echo "Uninstalling Vundle"
     rm -rf ${HOME}/.vim/bundle/Vundle.vim
+
+    if [-a "${HOME}/.zshrc"]; then
+        echo "Uninstalling oh-my-zsh and config files"
+        rm ${HOME}/.zshrc
+        rm -rf ${HOME}/.oh-my-zsh
 
 else
     echo "Usage: config install/uninstall"
